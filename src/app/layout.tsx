@@ -1,26 +1,26 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { AuthObserver } from "@/components/auth/AuthObserver";
+import { Sidebar } from "@/components/layout/Sidebar";
+import { Navbar } from "@/components/layout/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "文心匯 Wenxin Nexus",
-  description: "高中國文互動式學習平台",
-};
-
-export default function RootLayout({
+export default function DashboardLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="zh-TW">
-      <body className={inter.className}>
-        <AuthObserver />
-        {children}
-      </body>
-    </html>
+    <div className="flex min-h-screen bg-slate-50">
+      {/* 左側固定選單 */}
+      <Sidebar />
+
+      {/* 右側主要內容區 */}
+      <div className="flex-1 flex flex-col min-h-screen">
+        <Navbar />
+        
+        <main className="flex-1 p-6 overflow-auto">
+          <div className="max-w-7xl mx-auto">
+            {children}
+          </div>
+        </main>
+      </div>
+    </div>
   );
 }
